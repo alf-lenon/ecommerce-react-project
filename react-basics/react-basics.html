@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+	<head>
+		<title>React Basics</title>
+	</head>
+	<body>
+		<div class="container"></div>
+
+		<!--React for website-->
+		<script src="https://unpkg.com/supersimpledev/react.js"></script>
+		<script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+		<!--Translates JSX code into Javascript code-->
+		<script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+		<!--Translates JSX code into Javascript code-->
+		<script type="text/babel">
+			//JSX (allows you to write HTML directly within JavaScript code)
+			// JSX Example:
+			const button = <button>Button</button>;
+
+			const paragraph = <p>Paragraph</p>;
+
+			// Div - Allows you to render multiple HTML Elements
+			const div = (
+				<div>
+					<p>5 + 5 = {5 + 5}</p>
+					<button>Button</button>
+					<h1>Title</h1>
+				</div>
+			);
+			// End of an JSX Example
+
+			// Container - This is where we display or render codes
+			const container = document.querySelector('.container');
+
+			// This is where we display or render codes
+			const root = ReactDOM.createRoot(container);
+
+			// Render
+			root.render(div);
+		</script>
+	</body>
+</html>

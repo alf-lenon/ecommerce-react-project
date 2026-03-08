@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+	<head>
+		<title>React Basics</title>
+	</head>
+	<body>
+		<div class="container"></div>
+		<!--React for website-->
+		<script src="https://unpkg.com/supersimpledev/react.js"></script>
+		<script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+		<!--Translates JSX code into Javascript code-->
+		<script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+		<!--Translates JSX code into Javascript code-->
+		<script type="text/babel">
+			function ChatInput() {
+				return (
+					<>
+						<input placeholder='Send a message to ChatBot' size='30' />
+						<button>Send</button>
+					</>
+				);
+			}
+
+			function ChatMessage({ message, sender }) {
+				return (
+					<div>
+						{sender === 'robot' && <img src='robot.png' width='50' />}
+						{message}
+						{sender === 'user' && <img src='user.png' width='50' />}
+					</div>
+				);
+			}
+
+			function ChatMessages() {
+				const [chatMessages, setChatMessages] = React.useState([
+					{
+						message: 'hello chatbot',
+						sender: 'user',
+						id: 'id1',
+					},
+					{
+						message: 'Hello! How can I help you?',
+						sender: 'robot',
+						id: 'id2',
+					},
+					{
+						message: 'can you get me todays date?',
+						sender: 'user',
+						id: 'id3',
+					},
+					{
+						message: 'Today is February 26',
+						sender: 'robot',
+						id: 'id4',
+					},
+				]);
+
+				// const chatMessages = array[0]; // Current data
+				// const setChatMessages = array[1]; // Function that updates the data
+
+				function sendMessage() {
+					setChatMessages([
+						...chatMessages, // Copy of the current data
+						{
+							message: 'Test',
+							sender: 'user',
+							id: crypto.randomUUID(),
+						},
+					]);
+				}
+
+				return (
+					<>
+						<button onClick={sendMessage}>Send message</button>
+						{chatMessages.map((chatMessage) => {
+							return (
+								<ChatMessage
+									message={chatMessage.message}
+									sender={chatMessage.sender}
+									key={chatMessage.id} // Key === unique ID
+								/>
+							);
+						})}
+					</>
+				);
+			}
+
+			function App() {
+				return (
+					<>
+						<ChatInput />
+						<ChatMessages />
+					</>
+				);
+			}
+
+			const container = document.querySelector('.container');
+
+			const root = ReactDOM.createRoot(container);
+
+			root.render(<App />);
+		</script>
+	</body>
+</html>

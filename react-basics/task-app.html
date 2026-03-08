@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Task App React Version</title>
+	</head>
+	<body>
+		<div class="container"></div>
+
+		<!--React for website-->
+		<script src="https://unpkg.com/supersimpledev/react.js"></script>
+		<script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+		<!--Translates JSX code into Javascript code-->
+		<script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+		<!--Translates JSX code into Javascript code-->
+		<script type="text/babel">
+			// Component
+			function TaskInput({ taskList, setTaskList }) {
+				const [taskInput, setTaskInput] = React.useState('');
+
+				function saveTaskInput(event) {
+					// Get the input value using event
+					setTaskInput(event.target.value);
+				}
+
+				return (
+					<>
+						<h1>Assign Task</h1>
+						<input
+							onChange={saveTaskInput}
+							placeholder='Enter task here..'
+							value={taskInput}
+						/>
+						<button onClick={addTask}>Add</button>
+					</>
+				);
+
+				function addTask() {
+					// Update the taskList with a new added task list
+					const newTaskList = [
+						...taskList,
+						{
+							title: taskInput,
+							assignedUser: 'Alf',
+							status: 'pending',
+							id: crypto.randomUUID(),
+						},
+					];
+					setTaskList(newTaskList);
+					// Update the textbox to empty
+					setTaskInput('');
+				}
+			}
+
+			// Render Tasks
+			function TaskRender({ title, assignedUser, status }) {
+				return (
+					<>
+						<p>Task: {title}</p>
+						<p>Assigned User: {assignedUser}</p>
+						<p>Status: {status}</p>
+					</>
+				);
+			}
+
+			// Rendering tasks logic
+			function TasksRender({ taskList }) {
+				// Generate into HTML using .map
+				return (
+					<>
+						{taskList.map((task) => {
+							return (
+								<TaskRender
+									title={task.title}
+									assignedUser={task.assignedUser}
+									status={task.status}
+									key={task.id}
+								/>
+							);
+						})}
+					</>
+				);
+			}
+
+			// Main
+			function App() {
+				// Save data to useState
+				const [taskList, setTaskList] = React.useState([
+					{
+						title: 'Clean the house',
+						assignedUser: 'Alf',
+						status: 'pending',
+						id: crypto.randomUUID(),
+					},
+				]);
+
+				return (
+					<>
+						<TaskInput taskList={taskList} setTaskList={setTaskList} />
+						<TasksRender taskList={taskList} />
+					</>
+				);
+			}
+
+			const container = document.querySelector('.container');
+
+			const root = ReactDOM.createRoot(container);
+
+			root.render(<App />);
+		</script>
+	</body>
+</html>

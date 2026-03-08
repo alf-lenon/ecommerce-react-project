@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+	<head>
+		<title>React Basics</title>
+	</head>
+	<body>
+		<div class="container"></div>
+		<!--React for website-->
+		<script src="https://unpkg.com/supersimpledev/react.js"></script>
+		<script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+		<!--Translates JSX code into Javascript code-->
+		<script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+		<!--Translates JSX code into Javascript code-->
+		<script type="text/babel">
+			const container = document.querySelector('.container');
+
+			const root = ReactDOM.createRoot(container);
+
+			function App() {
+				return (
+					<div>
+						<button>Click</button>
+						<p>Paragraph</p>
+					</div>
+				);
+			}
+
+			root.render(<App />);
+		</script>
+	</body>
+</html>
