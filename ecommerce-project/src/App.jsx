@@ -1,12 +1,15 @@
+import { Routes, Route } from 'react-router';
 import HomePage from './pages/HomePage';
-import CheckOut from './pages/CheckOut';
+
 import './App.css';
 
 function App() {
 	return (
 		<>
-			<HomePage />
-			<CheckOut />
+			<Routes>
+				<Route index element={<HomePage />} />
+				<Route path='checkout' element={<div>Test Checkout Page</div>} />
+			</Routes>
 		</>
 	);
 }
